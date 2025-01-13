@@ -1,7 +1,9 @@
 export default [
-    {username: 'brad123',
-    email: 'brad@gmail.com',
-    firstName: 'Brad',
-    lastName: 'Smith',
-    profilePicture: ''}
-]
+	{
+		username: 'brad123',
+		email: 'brad@gmail.com',
+		firstName: 'Brad',
+		lastName: 'Smith',
+		profilePicture: '',
+	},
+];

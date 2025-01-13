@@ -1,7 +1,9 @@
-module.exports =  [
-    {username: 'brad123',
-    email: 'brad@gmail.com',
-    firstName: 'Brad',
-    lastName: 'Smith',
-    profilePicture: ''}
-]
+export default [
+	{
+		username: 'brad123',
+		email: 'brad@gmail.com',
+		firstName: 'Brad',
+		lastName: 'Smith',
+		profilePicture: '',
+	},
+];

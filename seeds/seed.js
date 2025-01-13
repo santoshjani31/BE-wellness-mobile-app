@@ -1,45 +1,70 @@
-import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
-import { getFirestore, Timestamp, FieldValue, Filter } from 'firebase-admin/firestore';
-import serviceAccount from '../proj-gr-2-wellness-app-firebase-adminsdk-nash5-df02dd3f00.json' with {type: 'json'};
+import { devDb } from '../connection.js';
 
+async function seed({ db, activitiesData, journalData, moodData, userData }) {
+	try {
+		await deleteCollection(db, 'Moods', moodData.length);
+		await deleteCollection(db, 'Activities', activitiesData.length);
+		await deleteCollection(db, 'Journal entries', journalData.length);
+		await deleteCollection(db, 'Users', userData.length);
 
-initializeApp({
-    credential: cert(serviceAccount)
-  });
+		moodData.forEach((mood) => {
+			const moodRef = db.collection('Moods').doc(`${mood.emotion}`);
+			moodRef.set(mood);
+		});
 
+		activitiesData.forEach((activity) => {
+			const activitiesRef = db
+				.collection('Activities')
+				.doc(`${activity.title}`);
+			activitiesRef.set(activity);
+		});
 
-const db = getFirestore();
+		journalData.forEach((entry, index) => {
+			const journalRef = db.collection('Journal entries').doc(`${index}`);
+			journalRef.set(entry);
+		});
 
-function seed ({activitiesData, journalData, moodData, userData}) {
-    try{
-        moodData.forEach((mood) => {
-            console.log(mood.emotion)
-        })
-        // const moodDocs = db.collection('Moods').doc()
-    }catch{
-
-    }
+		userData.forEach((user, index) => {
+			const userRef = db.collection('Users').doc(`${index}`);
+			userRef.set(user);
+		});
+	} catch (err) {
+		console.log(err);
+	}
 }
 
-export default seed
+// From Firestore docs
+async function deleteCollection(db, collectionPath, batchSize) {
+	const collectionRef = db.collection(collectionPath);
+	const query = collectionRef.orderBy('__name__').limit(batchSize);
 
-    // // ex of adding data 
-    // const postJournalEntry = async () => {
-    //     const docRef = db.collection('Journal entries').doc('2')
-    
-    //     await docRef.set({
-    //         'Body': 'oh no lots of snow very cold',
-    //         'Emotion': 'Sad',
-    //         'Title': 'Feeling cold'
-    //     })
-    //   }
-    
-    // const getSingleEntry = async () => {
-    //   const snapshot = db.collection('Journal entries').doc('1');
-    //   const entry  = await snapshot.get()
-    //   console.log(entry.data())
-      // console.log(snapshot.docs)
-      // snapshot.forEach((doc) => {
-      //   console.log(doc.id, '=>', doc.data());
-      // });
-    
+	return new Promise((resolve, reject) => {
+		deleteQueryBatch(db, query, resolve).catch(reject);
+	});
+}
+
+async function deleteQueryBatch(db, query, resolve) {
+	const snapshot = await query.get();
+
+	const batchSize = snapshot.size;
+	if (batchSize === 0) {
+		// When there are no documents left, we are done
+		resolve();
+		return;
+	}
+
+	// Delete documents in a batch
+	const batch = db.batch();
+	snapshot.docs.forEach((doc) => {
+		batch.delete(doc.ref);
+	});
+	await batch.commit();
+
+	// Recurse on the next process tick, to avoid
+	// exploding the stack.
+	process.nextTick(() => {
+		deleteQueryBatch(db, query, resolve);
+	});
+}
+
+export default seed;
