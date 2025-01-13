@@ -1,4 +1,4 @@
-[
+module.exports =  [
     {body: "lots of snow",
     emotion: 'sad',
     title: 'feeling cold'},

@@ -1,4 +1,4 @@
-[
+module.exports = [
     {emotion: sad}, 
     {emotion: happy},
     {emotion: anxious},

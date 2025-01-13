@@ -1,4 +1,4 @@
-[
+module.exports = [
     {title: 'meditation', 
     description: 'meditate with us be calm',
     duration: '120', //seconds
