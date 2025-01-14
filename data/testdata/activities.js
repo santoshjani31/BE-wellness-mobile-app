@@ -1,4 +1,4 @@
-module.exports =  [
+export default  [
 	{
 		title: 'activity 1',
 		description: 'meditate with us be calm',
