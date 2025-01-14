@@ -1,27 +1,19 @@
-import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
-import { getFirestore, Timestamp, FieldValue, Filter } from 'firebase-admin/firestore';
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { getFirestore } from 'firebase-admin/firestore';
 import serviceAccount from './SDK.json' with {type: 'json'};
-import testServiceAccount from './test-SDK.json' with {type: 'json'}
-
-// const devDbConfig = {
-//   credential: cert(serviceAccount)
-// }
-
-// const testDbConfig = {
-//   credential: cert(testServiceAccount)
-// }
-
-// const devDbInstance = initializeApp(devDbConfig, 'devDbInstance');
-
-// const testDbInstance = initializeApp(testDbConfig, 'testDbInstance')
-
-// const devDb = devDbInstance.getFirestore();
-// const testDb = testDbInstance.database();
+import 'dotenv/config';
 
 initializeApp({
-  credential: cert(serviceAccount)
-})
+  credential: cert(serviceAccount),
+});
 
 const db = getFirestore();
+
+if (process.env.NODE_ENV === 'test') {
+  console.log('inside test node_env')
+  // Connect to Firestore emulator if in test environment
+  db.useEmulator('localhost', 9090);
+}
 
 export default db;

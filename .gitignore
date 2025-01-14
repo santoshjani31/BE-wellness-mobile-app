@@ -2,3 +2,4 @@ node_modules
 SDK.json
 test-SDK.json
 .gitignore
+.env.*
