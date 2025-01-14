@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "proj-gr-2-wellness-app",
+    "test": "test-mindfulness-db"
+  },
+  "targets": {},
+  "etags": {}
+}

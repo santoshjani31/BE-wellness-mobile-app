@@ -1,6 +1,6 @@
-import { devDb } from '../connection.js';
+import db from '../connection.js';
 
-async function seed({ db, activitiesData, journalData, moodData, userData }) {
+async function seed({ activitiesData, journalData, moodData, userData }) {
 	try {
 		await deleteCollection(db, 'Moods', moodData.length);
 		await deleteCollection(db, 'Activities', activitiesData.length);
