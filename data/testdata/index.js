@@ -1,6 +1,6 @@
-const activitiesData = require ('./activities.js')
-const journalData = require  ('./journalentries.js')
-const moodData = require  ('./moods.js')
-const userData = require  ('./users.js') 
+import activitiesData from './activities.js'
+import journalData from './journalentries.js'
+import moodData from './moods.js'
+import userData from './users.js' 
 
-module.exports =  { activitiesData, journalData, moodData, userData }
+export default { activitiesData, journalData, moodData, userData }

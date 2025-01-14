@@ -1,8 +1,5 @@
-// import testData from '../data/testdata';
-// import seed from '../seeds/seed';
-
-const testData = require('../data/testdata') 
-const seed = require('../seeds/seed.cjs')
+import testData from '../data/testdata';
+import seed from '../seeds/seed';
 
 beforeEach(() => seed(testData))
 

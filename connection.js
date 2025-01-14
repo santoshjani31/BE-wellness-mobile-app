@@ -1,8 +1,8 @@
-const { initializeApp, cert } = require ('firebase-admin/app')
-const { getFirestore } = require ('firebase-admin/firestore');
-const serviceAccount = require ('./SDK.json');
-const testServiceAccount = require('./testSDK.json')
-require('dotenv').config()
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from'firebase-admin/firestore';
+import serviceAccount from './SDK.json' with {type:'json'};
+import testServiceAccount from './testSDK.json' with {type:'json'};
+import 'dotenv/config'
 
 
 if (process.env.NODE_ENV === 'test') {
@@ -11,7 +11,6 @@ if (process.env.NODE_ENV === 'test') {
   });
   
 } else {
-  console.log('inside dev enviroment')
   initializeApp({
     credential: cert(serviceAccount),
   });
@@ -19,4 +18,4 @@ if (process.env.NODE_ENV === 'test') {
 
 const db = getFirestore();
 
-module.exports = db
+export default db
