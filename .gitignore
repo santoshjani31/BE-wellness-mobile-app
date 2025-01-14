@@ -1,5 +1,5 @@
+.gitignore
 node_modules
 SDK.json
-test-SDK.json
-.gitignore
+testSDK.json
 .env.*

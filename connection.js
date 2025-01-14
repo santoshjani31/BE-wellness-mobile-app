@@ -1,19 +1,22 @@
-import { initializeApp, cert } from 'firebase-admin/app';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getFirestore } from 'firebase-admin/firestore';
-import serviceAccount from './SDK.json' with {type: 'json'};
-import 'dotenv/config';
+const { initializeApp, cert } = require ('firebase-admin/app')
+const { getFirestore } = require ('firebase-admin/firestore');
+const serviceAccount = require ('./SDK.json');
+const testServiceAccount = require('./testSDK.json')
+require('dotenv').config()
 
-initializeApp({
-  credential: cert(serviceAccount),
-});
+
+if (process.env.NODE_ENV === 'test') {
+  initializeApp({
+    credential: cert(testServiceAccount),
+  });
+  
+} else {
+  console.log('inside dev enviroment')
+  initializeApp({
+    credential: cert(serviceAccount),
+  });
+}
 
 const db = getFirestore();
 
-if (process.env.NODE_ENV === 'test') {
-  console.log('inside test node_env')
-  // Connect to Firestore emulator if in test environment
-  db.useEmulator('localhost', 9090);
-}
-
-export default db;
+module.exports = db

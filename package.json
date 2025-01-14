@@ -10,8 +10,11 @@
     "jest": "^29.7.0"
   },
   "scripts": {
-    "seed": "node ./seeds/run_seed.js",
+    "seed": "node ./seeds/run_seed.cjs",
     "test": "jest"
   },
-  "type": "module"
+  "type": "module",
+  "jest": {
+    "transform": {}
+  }
 }

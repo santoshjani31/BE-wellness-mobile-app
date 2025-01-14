@@ -1,4 +1,4 @@
-import db from '../connection.js';
+const db = require ('../connection.js');
 
 async function seed({ activitiesData, journalData, moodData, userData }) {
 	try {
@@ -67,4 +67,4 @@ async function deleteQueryBatch(db, query, resolve) {
 	});
 }
 
-export default seed;
+module.exports = seed

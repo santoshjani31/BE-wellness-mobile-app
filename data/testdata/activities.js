@@ -1,6 +1,6 @@
-export default [
+module.exports =  [
 	{
-		title: 'meditation',
+		title: 'activity 1',
 		description: 'meditate with us be calm',
 		duration: '120', //seconds
 		audioURL: '',
@@ -10,7 +10,7 @@ export default [
 	},
 
 	{
-		title: 'single tasking',
+		title: 'activity 2 ',
 		description: 'focus on one thing at a time',
 		duration: '600', //seconds
 		audioURL: '',
@@ -20,7 +20,7 @@ export default [
 	},
 
 	{
-		title: 'yoga flow',
+		title: 'activity 3 ',
 		description: 'move your body and ground yourself with yoga',
 		duration: '350', //seconds
 		audioURL: '',

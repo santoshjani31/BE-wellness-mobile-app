@@ -1,4 +1,4 @@
-export default [
+module.exports =  [
 	{
 		username: 'brad123',
 		email: 'brad@gmail.com',
