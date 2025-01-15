@@ -4,6 +4,7 @@ export default [
 		emotion: 'sad',
 		title: 'feeling cold',
 		created_at: new Date(Date.now()),
+		user: 'brad@gmail.com'
 	},
 
 	{
@@ -11,5 +12,6 @@ export default [
 		emotion: 'happy',
 		title: ' what a day!',
 		created_at: new Date(Date.now()),
+		username: 'brad123'
 	},
 ];

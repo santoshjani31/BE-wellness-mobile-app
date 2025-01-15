@@ -7,6 +7,7 @@ export default [
 		imageURL: '',
 		category: 'breathing',
 		difficulty: 'advanced',
+		moodTag: 'stressed'
 	},
 
 	{
@@ -17,6 +18,7 @@ export default [
 		imageURL: '',
 		category: 'mindfulness',
 		difficulty: 'beginner',
+		moodTag: 'anxious'
 	},
 
 	{
@@ -27,5 +29,47 @@ export default [
 		imageURL: '',
 		category: 'movement',
 		difficulty: 'intermediate',
+		moodTag: ['happy', 'anxious']
+	},
+
+	{
+		title: 'express gratitude',
+		description: 'journal or speak out loud and be grateful',
+		audioURL: '',
+		imageURL: '',
+		category: 'movement',
+		difficulty: 'intermediate',
+		moodTag: 'happy'
+	},
+
+	{
+		title: 'reach out to a friend',
+		description: 'make plans or phone a friend today',
+		audioURL: '',
+		imageURL: '',
+		category: 'social connections',
+		moodTag: 'happy'
+	},
+
+	{
+		title: 'dance party',
+		description: 'some good tunes and move your body',
+		duration: '300', //seconds
+		audioURL: '',
+		imageURL: '',
+		category: 'movement',
+		difficulty: 'intermediate',
+		moodTag: 'happy'
+	},
+
+	{
+		title: 'cook your favourite meal!',
+		description: 'treat yourself to some good food',
+		duration: '1200', //seconds
+		audioURL: '',
+		imageURL: '',
+		category: 'self-care',
+		difficulty: 'intermediate',
+		moodTag: 'happy'
 	},
 ];
