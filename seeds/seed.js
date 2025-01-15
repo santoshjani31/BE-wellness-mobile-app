@@ -1,4 +1,4 @@
-import {db} from '../connection.js';
+import db from '../connection.js';
 
 async function seed({ activitiesData, journalData, moodData, userData }) {
 	try {
@@ -7,26 +7,27 @@ async function seed({ activitiesData, journalData, moodData, userData }) {
 		await deleteCollection(db, 'Journal entries', journalData.length);
 		await deleteCollection(db, 'Users', userData.length);
 
-		moodData.forEach((mood) => {
+		moodData.forEach(async (mood) => {
+			console.log('inputting mood to db');
 			const moodRef = db.collection('Moods').doc(`${mood.emotion}`);
-			moodRef.set(mood);
+			await moodRef.set(mood);
 		});
 
-		activitiesData.forEach((activity) => {
+		activitiesData.forEach(async (activity) => {
 			const activitiesRef = db
 				.collection('Activities')
 				.doc(`${activity.title}`);
-			activitiesRef.set(activity);
+			await activitiesRef.set(activity);
 		});
 
-		journalData.forEach((entry, index) => {
+		journalData.forEach(async (entry, index) => {
 			const journalRef = db.collection('Journal entries').doc(`${index}`);
-			journalRef.set(entry);
+			await journalRef.set(entry);
 		});
 
-		userData.forEach((user, index) => {
+		userData.forEach(async (user, index) => {
 			const userRef = db.collection('Users').doc(`${index}`);
-			userRef.set(user);
+			await userRef.set(user);
 		});
 	} catch (err) {
 		console.log(err);
@@ -67,4 +68,4 @@ async function deleteQueryBatch(db, query, resolve) {
 	});
 }
 
-export default seed
+export default seed;
