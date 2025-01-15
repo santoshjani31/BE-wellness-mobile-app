@@ -1,4 +1,4 @@
-import db from '../connection.js';
+import {db} from '../connection.js';
 
 async function seed({ activitiesData, journalData, moodData, userData }) {
 	try {
