@@ -1,6 +1,6 @@
 export default [
-	{ emotion: 'sad' },
-	{ emotion: 'happy' },
-	{ emotion: 'anxious' },
-	{ emotion: 'stressed' },
+	{ emotion: 'mood 1' },
+	{ emotion: 'mood 2' },
+	{ emotion: 'mood 3' },
+	{ emotion: 'mood 4' },
 ];
