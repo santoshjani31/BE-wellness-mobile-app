@@ -42,3 +42,9 @@ describe('/activities', () => {
 		});
 	});
 });
+
+describe('/journal', () => {
+	describe('GET /journal', () => {
+		test('200: Returns the array of journal entries');
+	});
+});
