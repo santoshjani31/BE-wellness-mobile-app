@@ -2,7 +2,6 @@ import db from '../connection.js';
 
 async function seed({
 	activitiesData,
-	journalData,
 	moodData,
 	userData,
 	articlesData,
@@ -10,7 +9,12 @@ async function seed({
 	try {
 		await deleteCollection(db, 'moods', moodData.length);
 		await deleteCollection(db, 'activities', activitiesData.length);
-		await deleteCollection(db, 'journal entries', journalData.length);
+
+		const usersRef = await db.collection('users').get()
+		usersRef.forEach(async (user) => {
+			await deleteCollection(db, `users/${user.id}/journal`, 50)
+		})
+
 		await deleteCollection(db, 'users', userData.length);
 		await deleteCollection(db, 'articles', articlesData.length);
 
@@ -26,13 +30,6 @@ async function seed({
 				.collection('activities')
 				.doc(`${activity.title}`)
 				.set(activity);
-		});
-
-		journalData.forEach(async (entry, index) => {
-			const journalRef = await db
-				.collection('journal entries')
-				.doc(`${index}`)
-				.set(entry);
 		});
 
 		userData.forEach(async (user, index) => {

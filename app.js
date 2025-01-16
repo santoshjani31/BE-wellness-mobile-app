@@ -4,6 +4,7 @@ import getMoods from './controllers/moods.controller.js';
 import getActivities from './controllers/activities.controller.js';
 import {getJournalEntries, postJournalEntry} from './controllers/journal.controller.js';
 import getUsersById from './controllers/users.controller.js'
+import  getArticles  from './controllers/articles.controller.js';
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/moods', getMoods);
+
+app.get('/articles', getArticles)
 
 app.get('/activities', getActivities);
 

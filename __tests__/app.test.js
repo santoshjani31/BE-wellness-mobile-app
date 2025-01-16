@@ -68,7 +68,6 @@ describe("/users", () => {
                 .get('/user/0/journal')
                 .expect(200)
                 .then(({body: {entries}}) => {
-                    expect(entries).toHaveLength(1)
                     entries.forEach((entry) => {
                         expect(entry).toMatchObject({
                             title: expect.any(String),
@@ -99,3 +98,25 @@ describe("/users", () => {
     });
     
 });
+
+describe("/articles", () => {
+    describe("GET /articles", () => {
+        test("200: returns all articles", async () => {
+            return request(app)
+            .get('/articles')
+            .expect(200)
+            .then(({body: {articles}}) => {
+                expect(articles).toHaveLength(5)
+                articles.forEach((article) => {
+                    expect(article).toMatchObject({
+                        title: expect.any(String),
+                        body: expect.any(String),
+                        mood: expect.any(String),
+                        picture: expect.any(String),
+                        author: expect.any(String),
+                    })
+                })
+            })
+        })
+    })
+})

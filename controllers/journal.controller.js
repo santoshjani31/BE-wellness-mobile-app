@@ -14,9 +14,10 @@ export const getJournalEntries = async (req, res, next) => {
 export const postJournalEntry = async (req, res, next) => {
 	try{
 		const {id} = req.params
-		const {body} = req.body
+		const newEntry = req.body
 
-		return 
+		const postedEntry = await createJournalEntry(id, newEntry)
+		res.status(201).send({entry: postedEntry})
 
 	} catch(err){
 		console.log(err)
