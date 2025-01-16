@@ -1,33 +1,49 @@
 import db from '../connection.js';
 
-async function seed({ activitiesData, journalData, moodData, userData }) {
+async function seed({
+	activitiesData,
+	journalData,
+	moodData,
+	userData,
+	articlesData,
+}) {
 	try {
-		await deleteCollection(db, 'Moods', moodData.length);
-		await deleteCollection(db, 'Activities', activitiesData.length);
-		await deleteCollection(db, 'Journal entries', journalData.length);
-		await deleteCollection(db, 'Users', userData.length);
+		await deleteCollection(db, 'moods', moodData.length);
+		await deleteCollection(db, 'activities', activitiesData.length);
+		await deleteCollection(db, 'journal entries', journalData.length);
+		await deleteCollection(db, 'users', userData.length);
+		await deleteCollection(db, 'articles', articlesData.length);
 
 		moodData.forEach(async (mood) => {
-			console.log('inputting mood to db');
-			const moodRef = db.collection('Moods').doc(`${mood.emotion}`);
-			await moodRef.set(mood);
+			const moodsRef = await db
+				.collection('moods')
+				.doc(`${mood.emotion}`)
+				.set(mood);
 		});
 
 		activitiesData.forEach(async (activity) => {
-			const activitiesRef = db
-				.collection('Activities')
-				.doc(`${activity.title}`);
-			await activitiesRef.set(activity);
+			const activitiesRef = await db
+				.collection('activities')
+				.doc(`${activity.title}`)
+				.set(activity);
 		});
 
 		journalData.forEach(async (entry, index) => {
-			const journalRef = db.collection('Journal entries').doc(`${index}`);
-			await journalRef.set(entry);
+			const journalRef = await db
+				.collection('journal entries')
+				.doc(`${index}`)
+				.set(entry);
 		});
 
 		userData.forEach(async (user, index) => {
-			const userRef = db.collection('Users').doc(`${index}`);
-			await userRef.set(user);
+			const userRef = await db.collection('users').doc(`${index}`).set(user);
+		});
+
+		articlesData.forEach(async (article, index) => {
+			const articlesRef = await db
+				.collection('articles')
+				.doc(`${index}`)
+				.set(article);
 		});
 	} catch (err) {
 		console.log(err);
