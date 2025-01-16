@@ -16,6 +16,7 @@
 	},
 	"scripts": {
 		"seed": "node ./seeds/run_seed.js",
+    "test-seed": "node ./seeds/run-test-seed.js",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"start": "node listen.js"
 	},

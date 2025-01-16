@@ -1,12 +1,21 @@
 import db from '../connection.js';
 
-const fetchJournalEntries = async () => {
-	const entriesArr = [];
-	const entries = await db.collection('journal entries').get();
-	entries.forEach((entry) => {
-		entriesArr.push(entry.data());
-	});
-	return entriesArr;
+const fetchJournalByUser = async (id) => {
+	const userRef = db.collection('users').doc(id)
+    const userGet = await userRef.get()
+    const journal = await userRef.collection('journal').get();
+    
+    const entryArray = []
+
+    journal.forEach((entry)=> {
+		entryArray.push(entry.data())
+    })
+
+    return entryArray
 };
 
-export default fetchJournalEntries;
+const createJournalEntry = async (id, body) => {
+	console.log(body)
+}
+
+export {fetchJournalByUser, createJournalEntry};
