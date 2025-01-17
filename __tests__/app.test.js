@@ -53,14 +53,15 @@ describe('/activities', () => {
 						});
 					});
 			});
-			test('200: Returns the array of activities filtered to the input query', async () => {
+			test('200: Returns the array of activities filtered to the input queries with multiple conditions', async () => {
 				return request(app)
-					.get('/activities?category=mindfulness')
+					.get('/activities?moodTag=happy&category=breathing')
 					.expect(200)
 					.then(({ body: { activities } }) => {
 						expect(activities).toHaveLength(1);
 						activities.forEach((activity) => {
-							expect(activity).toHaveProperty('category', 'mindfulness');
+							expect(activity).toHaveProperty('category', 'breathing');
+							expect(activity).toHaveProperty('moodTag', 'happy');
 						});
 					});
 			});

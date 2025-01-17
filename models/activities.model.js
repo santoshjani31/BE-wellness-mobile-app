@@ -5,7 +5,12 @@ const fetchActivities = async (moodTag, category) => {
 	const activities = db.collection('activities');
 	let snapshot = '';
 
-	if (moodTag) {
+	if (moodTag && category) {
+		snapshot = await activities
+			.where('moodTag', '==', moodTag)
+			.where('category', '==', category)
+			.get();
+	} else if (moodTag) {
 		snapshot = await activities.where('moodTag', '==', moodTag).get();
 	} else if (category) {
 		snapshot = await activities.where('category', '==', category).get();
