@@ -139,7 +139,7 @@ describe('/users', () => {
 					});
 			});
 		});
-        describe.skip('GET /user/:id/journal/:journal_id', () => {
+        describe('GET /user/:id/journal/:journal_id', () => {
             test('200: returns a journal entry by id', () => {
                 return request(app)
                 .get('/user/0/journal/1')
@@ -153,7 +153,7 @@ describe('/users', () => {
                 })})
             })
         })
-        describe.skip('DELETE /users/:id/journal/:journal_id', () => {
+        describe('DELETE /users/:id/journal/:journal_id', () => {
             test('204: deletes a journal by its id from the users profile', () => {
                 return request(app)
                 .delete('/user/0/journal/4')
@@ -181,6 +181,17 @@ describe('/articles', () => {
 					});
 				});
 		});
+		test('200: returns all articles filtered by the input query', () => {
+			return request(app)
+			.get('/articles?mood=sad')
+			.expect(200)
+			.then(({body: {articles}}) => {
+				expect(articles).toHaveLength(2)
+				articles.forEach((article) => {
+					expect(article).toHaveProperty("mood", 'sad')
+				})
+			})
+		})
 	});
 	describe('GET /articles/:article_id', () => {
 		test('200: Returns the correct article by the input id', async () => {
@@ -191,7 +202,7 @@ describe('/articles', () => {
 					expect(article).toMatchObject({
 						title: 'article 4',
 						body: 'body of article 4',
-						mood: 'mood 4',
+						mood: 'stressed',
 						picture: 'picture of article 4',
 						author: 'author 4',
 					});

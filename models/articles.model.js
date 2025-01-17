@@ -1,11 +1,20 @@
 import db from '../connection.js';
 
-const fetchArticles = async () => {
+const fetchArticles = async (mood) => {
 	const articlesArr = [];
-	const articleRef = await db.collection('articles').get();
-	articleRef.forEach((article) => {
+	const articleRef = db.collection('articles');
+	let articles = ''
+
+	if(mood){
+		articles = await articleRef.where('mood', '=', mood).get()
+	} else {
+		articles =await  articleRef.get()
+	}
+
+	articles.forEach((article) => {
 		articlesArr.push(article.data());
 	});
+
 	return articlesArr;
 };
 

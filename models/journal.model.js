@@ -27,9 +27,16 @@ const fetchJournalEntryById = async (id, journal_id) => {
 }
 
 const banishJournalEntry = async (id, journal_id) => {
-	const userRef = db.collection('users').doc(id);
-	const journalEntry = await userRef.collection('journal').doc(journal_id).delete()
-	return;
+	const entryToDelete = await fetchJournalEntryById(id, journal_id)
+
+	if(entryToDelete !== undefined){
+		const userRef = db.collection('users').doc(id);
+		const journalEntry = await userRef.collection('journal').doc(journal_id).delete()
+		return;
+	} else {
+		return Promise.reject({status: 404, msg: "not found"})
+	}
+
 }
 
 export { fetchJournalByUser, createJournalEntry, fetchJournalEntryById, banishJournalEntry };

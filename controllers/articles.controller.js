@@ -2,7 +2,8 @@ import { fetchArticles, fetchArticleById } from '../models/articles.model.js';
 
 const getArticles = async (req, res, next) => {
 	try {
-		const articles = await fetchArticles();
+		const {mood} = req.query
+		const articles = await fetchArticles(mood);
 		res.status(200).send({ articles });
 	} catch (err) {
 		console.log(err);

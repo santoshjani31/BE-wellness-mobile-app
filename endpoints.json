@@ -3,7 +3,9 @@
 		"description": "serves an array of all moods"
 	},
 	"GET /articles": {
-		"description": "serves an array of all articles"
+		"description": "serves an array of all articles",
+		"queries": "mood",
+		"example": "/articles?mood=sad"
 	},
 	"GET /articles/:article_id": {
 		"description": "serves an individual article by it's id"
