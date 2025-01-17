@@ -1,4 +1,7 @@
-import fetchActivities from '../models/activities.model.js';
+import {
+	fetchActivities,
+	fetchActivityById,
+} from '../models/activities.model.js';
 
 const getActivities = async (req, res, next) => {
 	try {
@@ -9,4 +12,14 @@ const getActivities = async (req, res, next) => {
 	}
 };
 
-export default getActivities;
+const getActivityById = async (req, res, next) => {
+	try {
+		const { activity_title } = req.params;
+		const activity = await fetchActivityById(activity_title);
+		res.status(200).send({ activity });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export { getActivities, getActivityById };

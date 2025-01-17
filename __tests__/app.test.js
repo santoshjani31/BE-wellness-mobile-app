@@ -41,82 +41,115 @@ describe('/activities', () => {
 				});
 		});
 	});
+	describe('GET /activities/:activity_title', () => {
+		test('200: Returns the correct activity by the input title', async () => {
+			return request(app)
+				.get('/activities/activity 1')
+				.expect(200)
+				.then(({ body: { activity } }) => {
+					expect(activity).toMatchObject({
+						title: 'activity 1',
+						description: 'meditate with us be calm',
+						duration: '120',
+						audioURL: '',
+						imageURL: '',
+						category: 'breathing',
+						difficulty: 'advanced',
+					});
+				});
+		});
+	});
 });
 
-describe("/users", () => {
-    describe(" GET/users/:id", () => {
-        test("200: returns a user by id", async () => {
-            return request(app)
-            .get('/user/0')
+describe('/users', () => {
+	describe(' GET/users/:id', () => {
+		test('200: returns a user by id', async () => {
+			return request(app)
+				.get('/user/0')
 				.expect(200)
 				.then(({ body: { user } }) => {
 					expect(user).toMatchObject({
-                        username: 'fakebrad123',
-                        email: 'fakebrad@gmail.com',
-                        firstName: 'Test Brad',
-                        lastName: 'Testsmith',
-                        profilePicture: '',
-                    })
+						username: 'fakebrad123',
+						email: 'fakebrad@gmail.com',
+						firstName: 'Test Brad',
+						lastName: 'Testsmith',
+						profilePicture: '',
+					});
 				});
-        })
-    });
+		});
+	});
 
-    describe('/journal', () => {
-        describe('GET /user/:id/journal', () => {
-            test('200: Returns the array of journal entries connected to a user', async () => {
-                return request(app)
-                .get('/user/0/journal')
-                .expect(200)
-                .then(({body: {entries}}) => {
-                    entries.forEach((entry) => {
-                        expect(entry).toMatchObject({
-                            title: expect.any(String),
-                            emotion: expect.any(String),
-                            body: expect.any(String),
-                        })
-                    })
-                })
-            });
-        });
-        describe('POST /user/:id/journal', () => {
-            test("201: Posts a new journal entry to the users journal", async () => {
-                const newEntry = {
-                    title: "I am feelling like fishing",
-                    emotion: "anxious",
-                    body: "I wouold like to go fishing, but Im scared of the hooks",
-                }
+	describe('/journal', () => {
+		describe('GET /user/:id/journal', () => {
+			test('200: Returns the array of journal entries connected to a user', async () => {
+				return request(app)
+					.get('/user/0/journal')
+					.expect(200)
+					.then(({ body: { entries } }) => {
+						entries.forEach((entry) => {
+							expect(entry).toMatchObject({
+								title: expect.any(String),
+								emotion: expect.any(String),
+								body: expect.any(String),
+							});
+						});
+					});
+			});
+		});
+		describe('POST /user/:id/journal', () => {
+			test('201: Posts a new journal entry to the users journal', async () => {
+				const newEntry = {
+					title: 'I am feelling like fishing',
+					emotion: 'anxious',
+					body: 'I wouold like to go fishing, but Im scared of the hooks',
+				};
 
-                return request(app)
-                .post('/user/0/journal')
-                .send(newEntry)
-                .expect(201)
-                .then(({body: {entry}}) => {
-                    expect(entry).toMatchObject(newEntry)
-                })
-            })
-        })
-    });
-    
+				return request(app)
+					.post('/user/0/journal')
+					.send(newEntry)
+					.expect(201)
+					.then(({ body: { entry } }) => {
+						expect(entry).toMatchObject(newEntry);
+					});
+			});
+		});
+	});
 });
 
-describe("/articles", () => {
-    describe("GET /articles", () => {
-        test("200: returns all articles", async () => {
-            return request(app)
-            .get('/articles')
-            .expect(200)
-            .then(({body: {articles}}) => {
-                expect(articles).toHaveLength(5)
-                articles.forEach((article) => {
-                    expect(article).toMatchObject({
-                        title: expect.any(String),
-                        body: expect.any(String),
-                        mood: expect.any(String),
-                        picture: expect.any(String),
-                        author: expect.any(String),
-                    })
-                })
-            })
-        })
-    })
-})
+describe('/articles', () => {
+	describe('GET /articles', () => {
+		test('200: Returns all articles', async () => {
+			return request(app)
+				.get('/articles')
+				.expect(200)
+				.then(({ body: { articles } }) => {
+					expect(articles).toHaveLength(5);
+					articles.forEach((article) => {
+						expect(article).toMatchObject({
+							title: expect.any(String),
+							body: expect.any(String),
+							mood: expect.any(String),
+							picture: expect.any(String),
+							author: expect.any(String),
+						});
+					});
+				});
+		});
+	});
+	describe('GET /articles/:article_id', () => {
+		test('200: Returns the correct article by the input id', async () => {
+			return request(app)
+				.get('/articles/3')
+				.expect(200)
+				.then(({ body: { article } }) => {
+					expect(article).toMatchObject({
+						title: 'article 4',
+						body: 'body of article 4',
+						mood: 'mood 4',
+						picture: 'picture of article 4',
+						author: 'author 4',
+					});
+				});
+		});
+	});
+});

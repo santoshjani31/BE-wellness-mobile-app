@@ -9,4 +9,9 @@ const fetchActivities = async () => {
 	return activitiesArr;
 };
 
-export default fetchActivities;
+const fetchActivityById = async (activity_title) => {
+	const activity = await db.collection('activities').doc(activity_title).get();
+	return activity.data();
+};
+
+export { fetchActivities, fetchActivityById };
