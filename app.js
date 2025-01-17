@@ -11,6 +11,7 @@ import {
 	postJournalEntry,
     getJournalEntryById,
     deleteJournalEntry,
+	patchJournalEntry,
 } from './controllers/journal.controller.js';
 import getUsersById from './controllers/users.controller.js';
 import {
@@ -44,5 +45,7 @@ app.post('/user/:id/journal', postJournalEntry);
 app.get('/user/:id/journal/:journal_id', getJournalEntryById)
 
 app.delete('/user/:id/journal/:journal_id', deleteJournalEntry)
+
+app.patch('/user/:id/journal/:journal_id', patchJournalEntry)
 
 export default app;

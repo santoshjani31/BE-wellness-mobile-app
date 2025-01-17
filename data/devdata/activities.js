@@ -7,7 +7,7 @@ export default [
 		imageURL: '',
 		category: 'breathing',
 		difficulty: 'advanced',
-		moodTag: 'stressed',
+		moodTag: ['stressed', 'sad'],
 	},
 
 	{
@@ -29,7 +29,7 @@ export default [
 		imageURL: '',
 		category: 'movement',
 		difficulty: 'intermediate',
-		moodTag: ['happy', 'anxious'],
+		moodTag: ['happy', 'anxious', 'sad'],
 	},
 
 	{
@@ -50,7 +50,7 @@ export default [
 		audioURL: '',
 		imageURL: '',
 		category: 'social connections',
-		moodTag: 'happy',
+		moodTag: ['happy', 'sad'],
 	},
 
 	{
@@ -60,7 +60,7 @@ export default [
 		audioURL: '',
 		imageURL: '',
 		category: 'movement',
-		difficulty: 'intermediate',
+		difficulty: 'beginner',
 		moodTag: 'happy',
 	},
 
@@ -72,6 +72,30 @@ export default [
 		imageURL: '',
 		category: 'self-care',
 		difficulty: 'intermediate',
-		moodTag: 'happy',
+		moodTag: ['happy', 'sad'],
+	},
+
+	{
+		title: 'go for a short walk in nature',
+		description:
+			'go down to the local park and spend some time walking around a green space. Moving your body and getting some sunlight can help boost your serotonin levels',
+		duration: 900, //seconds
+		audioURL: '',
+		imageURL: '',
+		category: 'movement',
+		difficulty: 'beginner',
+		moodTag: ['sad', 'anxious', 'stressed'],
+	},
+
+	{
+		title: 'listen to music',
+		description:
+			'put on your favourite playlist and listen to some songs to take your mind away from your current feelings',
+		duration: 300, //seconds
+		audioURL: '',
+		imageURL: '',
+		category: 'self-care',
+		difficulty: 'beginner',
+		moodTag: ['anxious', 'stressed'],
 	},
 ];

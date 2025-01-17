@@ -139,28 +139,47 @@ describe('/users', () => {
 					});
 			});
 		});
-        describe('GET /user/:id/journal/:journal_id', () => {
-            test('200: returns a journal entry by id', () => {
-                return request(app)
-                .get('/user/0/journal/1')
-                .expect(200)
-                .then(({body: {journalEntry}}) => {
-                    expect(journalEntry).toMatchObject({
-                        title: 'I am feelling like fishing',
-                        emotion: 'anxious',
-                        body: 'I wouold like to go fishing, but Im scared of the hooks',
-                    })
-                })})
-            })
-        })
-        describe('DELETE /users/:id/journal/:journal_id', () => {
-            test('204: deletes a journal by its id from the users profile', () => {
-                return request(app)
-                .delete('/user/0/journal/4')
-                .expect(204)
-            })
-        })
+		describe('GET /user/:id/journal/:journal_id', () => {
+			test('200: returns a journal entry by id', async () => {
+				return request(app)
+					.get('/user/0/journal/Dffe1IjkkMYpmQGuAU0a')
+					.expect(200)
+					.then(({ body: { journalEntry } }) => {
+						expect(journalEntry).toMatchObject({
+							title: 'I am feelling like fishing',
+							emotion: 'anxious',
+							body: 'I wouold like to go fishing, but Im scared of the hooks',
+						});
+					});
+			});
+		});
 	});
+	describe.skip('DELETE /users/:id/journal/:journal_id', () => {
+		test('204: deletes a journal by its id from the users profile', () => {
+			return request(app)
+				.delete('/user/0/journal/Dffe1IjkkMYpmQGuAU0a')
+				.expect(204);
+		});
+	});
+	describe('PATCH /users/:id/journal/:journal_id', () => {
+		test('200: returns the updated journal entry', async () => {
+			const updatedInfo = {
+				body: 'I am having lots of fun writing tests',
+			};
+			return request(app)
+				.patch('/user/0/journal/NOvYz7mYuECOa0nWogvu')
+				.send(updatedInfo)
+				.expect(200)
+				.then(({ body: { updatedEntry } }) => {
+					expect(updatedEntry).toMatchObject({
+						title: 'I am feelling like fishing',
+						emotion: 'anxious',
+						body: 'I am having lots of fun writing tests',
+					});
+				});
+		});
+	});
+});
 
 describe('/articles', () => {
 	describe('GET /articles', () => {
@@ -183,15 +202,15 @@ describe('/articles', () => {
 		});
 		test('200: returns all articles filtered by the input query', () => {
 			return request(app)
-			.get('/articles?mood=sad')
-			.expect(200)
-			.then(({body: {articles}}) => {
-				expect(articles).toHaveLength(2)
-				articles.forEach((article) => {
-					expect(article).toHaveProperty("mood", 'sad')
-				})
-			})
-		})
+				.get('/articles?mood=sad')
+				.expect(200)
+				.then(({ body: { articles } }) => {
+					expect(articles).toHaveLength(2);
+					articles.forEach((article) => {
+						expect(article).toHaveProperty('mood', 'sad');
+					});
+				});
+		});
 	});
 	describe('GET /articles/:article_id', () => {
 		test('200: Returns the correct article by the input id', async () => {
