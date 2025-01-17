@@ -1,4 +1,4 @@
-export default  [
+export default [
 	{
 		title: 'activity 1',
 		description: 'meditate with us be calm',
@@ -7,6 +7,7 @@ export default  [
 		imageURL: '',
 		category: 'breathing',
 		difficulty: 'advanced',
+		moodTag: 'happy',
 	},
 
 	{
@@ -17,6 +18,7 @@ export default  [
 		imageURL: '',
 		category: 'mindfulness',
 		difficulty: 'beginner',
+		moodTag: 'happy',
 	},
 
 	{
@@ -27,5 +29,6 @@ export default  [
 		imageURL: '',
 		category: 'movement',
 		difficulty: 'intermediate',
+		moodTag: 'sad',
 	},
 ];

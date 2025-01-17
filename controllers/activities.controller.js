@@ -5,7 +5,8 @@ import {
 
 const getActivities = async (req, res, next) => {
 	try {
-		const activities = await fetchActivities();
+		const { moodTag, category } = req.query;
+		const activities = await fetchActivities(moodTag, category);
 		res.status(200).send({ activities });
 	} catch (err) {
 		console.log(err);
