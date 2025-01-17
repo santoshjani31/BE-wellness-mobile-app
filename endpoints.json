@@ -1,0 +1,31 @@
+{
+	"GET /moods": {
+		"description": "serves an array of all moods"
+	},
+	"GET /articles": {
+		"description": "serves an array of all articles"
+	},
+	"GET /articles/:article_id": {
+		"description": "serves an individual article by it's id"
+	},
+	"GET /activities": {
+		"description": "serves an array of all activities",
+		"queries": "moodTag, category",
+		"example": [
+			"/activities?moodTag=happy",
+			"/activities?moodTag=happy&category=breathing"
+		]
+	},
+	"GET /activities/:activity_title": {
+		"description": "serves an individual activity by it's title"
+	},
+	"GET /user/:id": {
+		"description": "serves an individual user by their id"
+	},
+	"GET /user/:id/journal": {
+		"description": "serves an array of journal activities for a specific user"
+	},
+	"POST /user/:id/journal": {
+		"description": "creates a new journal entry for an individual user in the database"
+	}
+}

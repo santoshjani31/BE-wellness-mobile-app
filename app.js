@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import endpoints from './endpoints.json' with {type: 'json'};
 import getMoods from './controllers/moods.controller.js';
 import {
 	getActivities,
@@ -19,6 +20,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (req, res) => res.status(200).send({ endpoints }));
 
 app.get('/moods', getMoods);
 
