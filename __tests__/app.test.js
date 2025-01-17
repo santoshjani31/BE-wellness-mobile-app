@@ -2,6 +2,7 @@ import testData from '../data/testdata';
 import seed from '../seeds/seed';
 import app from '../app.js';
 import request from 'supertest';
+import activities from '../data/testdata/activities.js';
 
 // beforeEach(async () => await seed(testData));
 
@@ -39,6 +40,30 @@ describe('/activities', () => {
 						});
 					});
 				});
+		});
+		describe.only('/activities Queries', () => {
+			test('200: Returns the array of activities filtered to the input query', async () => {
+				return request(app)
+					.get('/activities?moodTag=happy')
+					.expect(200)
+					.then(({ body: { activities } }) => {
+						expect(activities).toHaveLength(2);
+						activities.forEach((activity) => {
+							expect(activity).toHaveProperty('moodTag', 'happy');
+						});
+					});
+			});
+			test('200: Returns the array of activities filtered to the input query', async () => {
+				return request(app)
+					.get('/activities?category=mindfulness')
+					.expect(200)
+					.then(({ body: { activities } }) => {
+						expect(activities).toHaveLength(1);
+						activities.forEach((activity) => {
+							expect(activity).toHaveProperty('category', 'mindfulness');
+						});
+					});
+			});
 		});
 	});
 	describe('GET /activities/:activity_title', () => {
