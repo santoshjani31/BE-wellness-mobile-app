@@ -6,6 +6,7 @@ const cors = require('cors');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 const serviceAccount = require('./SDK.json');
+const endpoints = require('./endpoints.json');
 //require('dotenv/config');
 
 // Initialize Firebase Admin SDK
@@ -197,6 +198,7 @@ const getUsersById = async (req, res) => {
 };
 
 // Routes
+app.get('/', (req, res) => res.status(200).send({ endpoints }));
 app.get('/moods', getMoods);
 app.get('/articles', getArticles);
 app.get('/articles/:article_id', getArticleById);
