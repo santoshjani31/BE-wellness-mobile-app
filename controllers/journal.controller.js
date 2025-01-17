@@ -1,6 +1,6 @@
-import {fetchJournalByUser, createJournalEntry} from '../models/journal.model.js';
+import {fetchJournalByUser, createJournalEntry, fetchJournalEntryById, banishJournalEntry} from '../models/journal.model.js';
 
-export const getJournalEntries = async (req, res, next) => {
+const getJournalEntries = async (req, res, next) => {
 	try {
 		const {id} = req.params
 		const entries = await fetchJournalByUser(id);
@@ -10,12 +10,11 @@ export const getJournalEntries = async (req, res, next) => {
 	}
 };
 
-
-export const postJournalEntry = async (req, res, next) => {
+const postJournalEntry = async (req, res, next) => {
 	try{
 		const {id} = req.params
 		const newEntry = req.body
-
+	
 		const postedEntry = await createJournalEntry(id, newEntry)
 		res.status(201).send({entry: postedEntry})
 
@@ -23,4 +22,28 @@ export const postJournalEntry = async (req, res, next) => {
 		console.log(err)
 	}
 }
-export default  {getJournalEntries, postJournalEntry}
+
+const getJournalEntryById = async (req, res, next) => {
+	try {
+		const {id, journal_id} = req.params
+		const journalEntry = await fetchJournalEntryById(id, journal_id)
+		res.status(200).send({journalEntry})
+		
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+const deleteJournalEntry = async (req,res, next) => {
+	try {
+		const {id, journal_id} = req.params
+		await banishJournalEntry(id, journal_id)
+		res.status(204).send()
+
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+
+export {getJournalEntries, postJournalEntry, getJournalEntryById, deleteJournalEntry}

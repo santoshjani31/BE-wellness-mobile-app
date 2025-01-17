@@ -27,5 +27,11 @@
 	},
 	"POST /user/:id/journal": {
 		"description": "creates a new journal entry for an individual user in the database"
+	},
+	"GET /user/:id/journal/:journal_id": {
+		"description": "serves an individual journal entry by its id, tied to its user"
+	}, 
+	"DELETE /user/:id/journal/:journal_id": {
+		"description": "deletes a journal entry by its id from a users profile"
 	}
 }

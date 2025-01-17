@@ -9,6 +9,8 @@ import {
 import {
 	getJournalEntries,
 	postJournalEntry,
+    getJournalEntryById,
+    deleteJournalEntry,
 } from './controllers/journal.controller.js';
 import getUsersById from './controllers/users.controller.js';
 import {
@@ -38,5 +40,9 @@ app.get('/user/:id', getUsersById);
 app.get('/user/:id/journal', getJournalEntries);
 
 app.post('/user/:id/journal', postJournalEntry);
+
+app.get('/user/:id/journal/:journal_id', getJournalEntryById)
+
+app.delete('/user/:id/journal/:journal_id', deleteJournalEntry)
 
 export default app;

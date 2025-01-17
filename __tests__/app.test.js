@@ -33,7 +33,7 @@ describe('/activities', () => {
 					activities.forEach((activity) => {
 						expect(activity).toMatchObject({
 							title: expect.any(String),
-							duration: expect.any(String),
+							duration: expect.any(Number),
 							difficulty: expect.any(String),
 							description: expect.any(String),
 							category: expect.any(String),
@@ -41,7 +41,7 @@ describe('/activities', () => {
 					});
 				});
 		});
-		describe.only('/activities Queries', () => {
+		describe('/activities Queries', () => {
 			test('200: Returns the array of activities filtered to the input query', async () => {
 				return request(app)
 					.get('/activities?moodTag=happy')
@@ -76,7 +76,7 @@ describe('/activities', () => {
 					expect(activity).toMatchObject({
 						title: 'activity 1',
 						description: 'meditate with us be calm',
-						duration: '120',
+						duration: 120,
 						audioURL: '',
 						imageURL: '',
 						category: 'breathing',
@@ -139,8 +139,28 @@ describe('/users', () => {
 					});
 			});
 		});
+        describe.skip('GET /user/:id/journal/:journal_id', () => {
+            test('200: returns a journal entry by id', () => {
+                return request(app)
+                .get('/user/0/journal/1')
+                .expect(200)
+                .then(({body: {journalEntry}}) => {
+                    expect(journalEntry).toMatchObject({
+                        title: 'I am feelling like fishing',
+                        emotion: 'anxious',
+                        body: 'I wouold like to go fishing, but Im scared of the hooks',
+                    })
+                })})
+            })
+        })
+        describe.skip('DELETE /users/:id/journal/:journal_id', () => {
+            test('204: deletes a journal by its id from the users profile', () => {
+                return request(app)
+                .delete('/user/0/journal/4')
+                .expect(204)
+            })
+        })
 	});
-});
 
 describe('/articles', () => {
 	describe('GET /articles', () => {

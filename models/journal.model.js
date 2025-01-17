@@ -2,9 +2,7 @@ import db from '../connection.js';
 
 const fetchJournalByUser = async (id) => {
 	const userRef = db.collection('users').doc(id);
-	// const userGet = await userRef.get()
 	const journal = await userRef.collection('journal').get();
-
 	const entryArray = [];
 
 	journal.forEach((entry) => {
@@ -22,4 +20,16 @@ const createJournalEntry = async (id, newEntry) => {
 	return postedEntry.data();
 };
 
-export { fetchJournalByUser, createJournalEntry };
+const fetchJournalEntryById = async (id, journal_id) => {
+	const userRef = db.collection('users').doc(id);
+	const journalEntry = await userRef.collection('journal').doc(journal_id).get();
+	return journalEntry.data()
+}
+
+const banishJournalEntry = async (id, journal_id) => {
+	const userRef = db.collection('users').doc(id);
+	const journalEntry = await userRef.collection('journal').doc(journal_id).delete()
+	return;
+}
+
+export { fetchJournalByUser, createJournalEntry, fetchJournalEntryById, banishJournalEntry };
