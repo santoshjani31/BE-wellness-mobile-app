@@ -3,7 +3,8 @@ export default [
 		title: 'meditation',
 		description: 'meditate with us be calm',
 		duration: 600, //seconds
-		audioURL: true,
+		audioURL:
+			'../../assets/audio_files/Calm - Among The Stars - Everet Almond.mp3',
 		imageURL: '../../assets/activity_pics/meditation.jpeg',
 		category: 'breathing',
 		difficulty: 'advanced',
@@ -25,7 +26,7 @@ export default [
 		title: 'yoga flow',
 		description: 'move your body and ground yourself with yoga',
 		duration: 350, //seconds
-		audioURL: true,
+		audioURL: '../../assets/audio_files/Happy - A Huevo - Luna Cantina.mp3',
 		imageURL: '../../assets/activity_pics/yoga.avif',
 		category: 'movement',
 		difficulty: 'intermediate',
@@ -57,7 +58,8 @@ export default [
 		title: 'dance party',
 		description: 'some good tunes and move your body',
 		duration: 300, //seconds
-		audioURL: true,
+		audioURL:
+			'../../assets/audio_files/Funky - I Had a Feeling - TrackTribe.mp3',
 		imageURL: '../../assets/activity_pics/conscious-dance.jpg',
 		category: 'movement',
 		difficulty: 'beginner',
@@ -92,7 +94,8 @@ export default [
 		description:
 			'put on your favourite playlist and listen to some songs to take your mind away from your current feelings',
 		duration: 300, //seconds
-		audioURL: true,
+		audioURL:
+			'../../assets/audio_files/Happy - Trabaja Duro Juega Duro - Luna Cantina.mp3',
 		imageURL: '../../assets/activity_pics/listen-to-music.jpg',
 		category: 'self-care',
 		difficulty: 'beginner',
