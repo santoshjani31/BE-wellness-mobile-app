@@ -7,7 +7,7 @@ export default [
 		imageURL: '',
 		category: 'breathing',
 		difficulty: 'advanced',
-		moodTag: 'happy',
+		moodTag: ['happy'],
 	},
 
 	{
@@ -18,7 +18,7 @@ export default [
 		imageURL: '',
 		category: 'mindfulness',
 		difficulty: 'beginner',
-		moodTag: 'happy',
+		moodTag: ['happy'],
 	},
 
 	{
@@ -29,6 +29,6 @@ export default [
 		imageURL: '',
 		category: 'movement',
 		difficulty: 'intermediate',
-		moodTag: 'sad',
+		moodTag: ['sad'],
 	},
 ];

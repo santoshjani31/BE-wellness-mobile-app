@@ -18,7 +18,7 @@ export default [
 		imageURL: '',
 		category: 'mindfulness',
 		difficulty: 'beginner',
-		moodTag: 'anxious',
+		moodTag: ['anxious'],
 	},
 
 	{
@@ -40,7 +40,7 @@ export default [
 		imageURL: '',
 		category: 'movement',
 		difficulty: 'intermediate',
-		moodTag: 'happy',
+		moodTag: ['happy'],
 	},
 
 	{
@@ -61,7 +61,7 @@ export default [
 		imageURL: '',
 		category: 'movement',
 		difficulty: 'beginner',
-		moodTag: 'happy',
+		moodTag: ['happy'],
 	},
 
 	{

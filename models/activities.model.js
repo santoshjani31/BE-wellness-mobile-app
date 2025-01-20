@@ -7,11 +7,13 @@ const fetchActivities = async (moodTag, category) => {
 
 	if (moodTag && category) {
 		snapshot = await activities
-			.where('moodTag', '==', moodTag)
+			.where('moodTag', 'array-contains', moodTag)
 			.where('category', '==', category)
 			.get();
 	} else if (moodTag) {
-		snapshot = await activities.where('moodTag', '==', moodTag).get();
+		snapshot = await activities
+			.where('moodTag', 'array-contains', moodTag)
+			.get();
 	} else if (category) {
 		snapshot = await activities.where('category', '==', category).get();
 	} else {
@@ -20,6 +22,7 @@ const fetchActivities = async (moodTag, category) => {
 	snapshot.forEach((activity) => {
 		activitiesArr.push(activity.data());
 	});
+
 	return activitiesArr;
 };
 
