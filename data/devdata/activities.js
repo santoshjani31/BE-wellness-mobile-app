@@ -4,7 +4,7 @@ export default [
 		description: 'meditate with us be calm',
 		duration: 600, //seconds
 		audioURL: true,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/meditation.jpeg',
 		category: 'breathing',
 		difficulty: 'advanced',
 		moodTag: ['stressed', 'sad'],
@@ -15,7 +15,7 @@ export default [
 		description: 'focus on one thing at a time',
 		duration: 600, //seconds
 		audioURL: false,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/single-tasking.jpeg',
 		category: 'mindfulness',
 		difficulty: 'beginner',
 		moodTag: ['anxious'],
@@ -26,7 +26,7 @@ export default [
 		description: 'move your body and ground yourself with yoga',
 		duration: 350, //seconds
 		audioURL: true,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/yoga.avif',
 		category: 'movement',
 		difficulty: 'intermediate',
 		moodTag: ['happy', 'anxious', 'sad'],
@@ -37,7 +37,7 @@ export default [
 		description: 'journal or speak out loud and be grateful',
 		duration: 120,
 		audioURL: false,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/express-gratitude-1.jpg',
 		category: 'movement',
 		difficulty: 'intermediate',
 		moodTag: ['happy'],
@@ -48,7 +48,7 @@ export default [
 		description: 'make plans or phone a friend today',
 		duration: 300,
 		audioURL: false,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/reach-out-friend.jpeg',
 		category: 'social connections',
 		moodTag: ['happy', 'sad'],
 	},
@@ -58,7 +58,7 @@ export default [
 		description: 'some good tunes and move your body',
 		duration: 300, //seconds
 		audioURL: true,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/conscious-dance.jpg',
 		category: 'movement',
 		difficulty: 'beginner',
 		moodTag: ['happy'],
@@ -69,7 +69,7 @@ export default [
 		description: 'treat yourself to some good food',
 		duration: 1200, //seconds
 		audioURL: false,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/cooking_meal.webp',
 		category: 'self-care',
 		difficulty: 'intermediate',
 		moodTag: ['happy', 'sad'],
@@ -81,7 +81,7 @@ export default [
 			'go down to the local park and spend some time walking around a green space. Moving your body and getting some sunlight can help boost your serotonin levels',
 		duration: 900, //seconds
 		audioURL: false,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/walk-in-nature.jpg',
 		category: 'movement',
 		difficulty: 'beginner',
 		moodTag: ['sad', 'anxious', 'stressed'],
@@ -93,7 +93,7 @@ export default [
 			'put on your favourite playlist and listen to some songs to take your mind away from your current feelings',
 		duration: 300, //seconds
 		audioURL: true,
-		imageURL: '',
+		imageURL: '../../assets/activity_pics/listen-to-music.jpg',
 		category: 'self-care',
 		difficulty: 'beginner',
 		moodTag: ['anxious', 'stressed'],
