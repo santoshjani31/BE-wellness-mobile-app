@@ -89,12 +89,21 @@ const getActivityById = async (req, res) => {
 
 // Combined Articles Controller and Model
 // Get Articles
-const fetchArticles = async () => {
+const fetchArticles = async (mood) => {
   const articlesArr = [];
-  const articleRef = await db.collection('articles').get();
-  articleRef.forEach((article) => {
+  const articleRef = db.collection('articles');
+  let articles = '';
+
+  if (mood) {
+    articles = await articleRef.where('mood', '=', mood).get();
+  } else {
+    articles = await articleRef.get();
+  }
+
+  articles.forEach((article) => {
     articlesArr.push(article.data());
   });
+
   return articlesArr;
 };
 
@@ -104,13 +113,13 @@ const fetchArticleById = async (article_id) => {
   return article.data();
 };
 
-const getArticles = async (req, res) => {
+const getArticles = async (req, res, next) => {
   try {
-    const articles = await fetchArticles();
+    const { mood } = req.query;
+    const articles = await fetchArticles(mood);
     res.status(200).send({ articles });
   } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Failed to fetch articles' });
+    console.log(err);
   }
 };
 
@@ -287,7 +296,7 @@ app.get('/user/:id/journal/:journal_id', getJournalEntryById);
 app.delete('/user/:id/journal/:journal_id', deleteJournalEntry);
 app.patch('/user/:id/journal/:journal_id', patchJournalEntry);
 
-//app.listen(4000, () => console.log('Server running on port 4000'));
+// app.listen(4000, () => console.log('Server running on port 4000'));
 // Firebase Function Export
 const functions = require('firebase-functions');
 
