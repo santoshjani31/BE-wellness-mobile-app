@@ -32,8 +32,11 @@
 	},
 	"GET /user/:id/journal/:journal_id": {
 		"description": "serves an individual journal entry by its id, tied to its user"
-	}, 
+	},
 	"DELETE /user/:id/journal/:journal_id": {
 		"description": "deletes a journal entry by its id from a users profile"
+	},
+	"PATCH /user/:id/journal/:journal_id": {
+		"description": "updates a specific journal entry with new information"
 	}
 }
