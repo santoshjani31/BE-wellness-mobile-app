@@ -60,7 +60,8 @@ export default [
 		duration: 300, //seconds
 		audioURL:
 			'../../assets/audio_files/Funky - I Had a Feeling - TrackTribe.mp3',
-		imageURL: '../../assets/activity_pics/conscious-dance.jpg',
+		imageURL:
+			'../../assets/audio_files/Happy - Read My Lips Time To Party - Everet Almond.mp3',
 		category: 'movement',
 		difficulty: 'beginner',
 		moodTag: ['happy'],
