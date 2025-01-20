@@ -33,16 +33,27 @@ const fetchActivities = async (moodTag, category) => {
   const activities = db.collection('activities');
   let snapshot = '';
 
-  if (moodTag) {
-    snapshot = await activities.where('moodTag', '==', moodTag).get();
+  console.log('moodTag:', moodTag, 'category:', category);
+
+  if (moodTag && category) {
+    snapshot = await activities
+      .where('moodTag', 'array-contains', moodTag)
+      .where('category', '==', category)
+      .get();
+  } else if (moodTag) {
+    snapshot = await activities
+      .where('moodTag', 'array-contains', moodTag)
+      .get();
   } else if (category) {
     snapshot = await activities.where('category', '==', category).get();
   } else {
     snapshot = await activities.get();
   }
+
   snapshot.forEach((activity) => {
     activitiesArr.push(activity.data());
   });
+
   return activitiesArr;
 };
 
@@ -114,11 +125,10 @@ const getArticleById = async (req, res) => {
   }
 };
 
-// Combined Journal Controller and Model
+//Journal Helper Functions
 const fetchJournalByUser = async (id) => {
   const userRef = db.collection('users').doc(id);
   const journal = await userRef.collection('journal').get();
-
   const entryArray = [];
 
   journal.forEach((entry) => {
@@ -136,6 +146,34 @@ const createJournalEntry = async (id, newEntry) => {
   return postedEntry.data();
 };
 
+const fetchJournalEntryById = async (id, journal_id) => {
+  const userRef = db.collection('users').doc(id);
+  const journalEntry = await userRef
+    .collection('journal')
+    .doc(journal_id)
+    .get();
+  return journalEntry.data();
+};
+
+const banishJournalEntry = async (id, journal_id) => {
+  const entryToDelete = await fetchJournalEntryById(id, journal_id);
+
+  if (entryToDelete !== undefined) {
+    const userRef = db.collection('users').doc(id);
+    await userRef.collection('journal').doc(journal_id).delete();
+  } else {
+    throw { status: 404, msg: 'Not found' };
+  }
+};
+
+const updateJournalEntry = async (id, journal_id, updatedInfo) => {
+  const userRef = db.collection('users').doc(id);
+  await userRef.collection('journal').doc(journal_id).update(updatedInfo);
+  const updatedEntry = await fetchJournalEntryById(id, journal_id);
+  return updatedEntry;
+};
+
+//Journal Controller Functions
 const getJournalEntries = async (req, res) => {
   try {
     const { id } = req.params;
@@ -157,6 +195,44 @@ const postJournalEntry = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send({ error: 'Failed to create journal entry' });
+  }
+};
+
+const getJournalEntryById = async (req, res) => {
+  try {
+    const { id, journal_id } = req.params;
+    const journalEntry = await fetchJournalEntryById(id, journal_id);
+    res.status(200).send({ journalEntry });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Failed to fetch journal entry' });
+  }
+};
+
+const deleteJournalEntry = async (req, res) => {
+  try {
+    const { id, journal_id } = req.params;
+    await banishJournalEntry(id, journal_id);
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    if (error.status === 404) {
+      res.status(404).send({ error: error.msg });
+    } else {
+      res.status(500).send({ error: 'Failed to delete journal entry' });
+    }
+  }
+};
+
+const patchJournalEntry = async (req, res) => {
+  try {
+    const { id, journal_id } = req.params;
+    const updatedInfo = req.body;
+    const updatedEntry = await updateJournalEntry(id, journal_id, updatedInfo);
+    res.status(200).send({ updatedEntry });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Failed to update journal entry' });
   }
 };
 
@@ -207,8 +283,11 @@ app.get('/activities/:activity_title', getActivityById);
 app.get('/user/:id', getUsersById);
 app.get('/user/:id/journal', getJournalEntries);
 app.post('/user/:id/journal', postJournalEntry);
+app.get('/user/:id/journal/:journal_id', getJournalEntryById);
+app.delete('/user/:id/journal/:journal_id', deleteJournalEntry);
+app.patch('/user/:id/journal/:journal_id', patchJournalEntry);
 
-// app.listen(4000, () => console.log('Server running on port 4000'));
+//app.listen(4000, () => console.log('Server running on port 4000'));
 // Firebase Function Export
 const functions = require('firebase-functions');
 
