@@ -38,6 +38,7 @@ describe('/activities', () => {
 							difficulty: expect.any(String),
 							description: expect.any(String),
 							category: expect.any(String),
+							audioURL: expect.any(Boolean),
 						});
 					});
 				});
@@ -78,7 +79,7 @@ describe('/activities', () => {
 						title: 'activity 1',
 						description: 'meditate with us be calm',
 						duration: 120,
-						audioURL: '',
+						audioURL: true,
 						imageURL: '',
 						category: 'breathing',
 						difficulty: 'advanced',
@@ -201,7 +202,7 @@ describe('/articles', () => {
 					});
 				});
 		});
-		test('200: returns all articles filtered by the input query', () => {
+		test('200: Returns all articles filtered by the input query', async () => {
 			return request(app)
 				.get('/articles?mood=sad')
 				.expect(200)
