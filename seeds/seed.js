@@ -5,15 +5,16 @@ async function seed({
 	moodData,
 	userData,
 	articlesData,
+	journalEntriesData,
 }) {
 	try {
 		await deleteCollection(db, 'moods', moodData.length);
 		await deleteCollection(db, 'activities', activitiesData.length);
 
-		const usersRef = await db.collection('users').get()
+		const usersRef = await db.collection('users').get();
 		usersRef.forEach(async (user) => {
-			await deleteCollection(db, `users/${user.id}/journal`, 50)
-		})
+			await deleteCollection(db, `users/${user.id}/journal`, 50);
+		});
 
 		await deleteCollection(db, 'users', userData.length);
 		await deleteCollection(db, 'articles', articlesData.length);
@@ -41,6 +42,14 @@ async function seed({
 				.collection('articles')
 				.doc(`${index}`)
 				.set(article);
+		});
+
+		journalEntriesData.forEach(async (entry, index) => {
+			const userRef = db.collection('users').doc('0');
+			const journalRef = await userRef
+				.collection('journal')
+				.doc(`${index}`)
+				.set(entry);
 		});
 	} catch (err) {
 		console.log(err);
