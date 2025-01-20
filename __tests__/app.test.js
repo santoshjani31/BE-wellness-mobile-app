@@ -49,7 +49,7 @@ describe('/activities', () => {
 					.then(({ body: { activities } }) => {
 						expect(activities).toHaveLength(2);
 						activities.forEach((activity) => {
-							expect(activity).toHaveProperty('moodTag', 'happy');
+							expect(activity).toHaveProperty('moodTag', ['happy']);
 						});
 					});
 			});
@@ -61,7 +61,7 @@ describe('/activities', () => {
 						expect(activities).toHaveLength(1);
 						activities.forEach((activity) => {
 							expect(activity).toHaveProperty('category', 'breathing');
-							expect(activity).toHaveProperty('moodTag', 'happy');
+							expect(activity).toHaveProperty('moodTag', ['happy']);
 						});
 					});
 			});
@@ -89,7 +89,7 @@ describe('/activities', () => {
 
 describe('/users', () => {
 	describe(' GET/users/:id', () => {
-		test('200: returns a user by id', async () => {
+		test('200: Returns a user by id', async () => {
 			return request(app)
 				.get('/user/0')
 				.expect(200)
@@ -142,41 +142,41 @@ describe('/users', () => {
 		describe('GET /user/:id/journal/:journal_id', () => {
 			test('200: returns a journal entry by id', async () => {
 				return request(app)
-					.get('/user/0/journal/Dffe1IjkkMYpmQGuAU0a')
+					.get('/user/0/journal/0')
 					.expect(200)
 					.then(({ body: { journalEntry } }) => {
 						expect(journalEntry).toMatchObject({
-							title: 'I am feelling like fishing',
-							emotion: 'anxious',
-							body: 'I wouold like to go fishing, but Im scared of the hooks',
+							title: 'Test Entry',
+							emotion: 'happy',
+							body: 'Test entry for the journal entries',
 						});
 					});
 			});
 		});
 	});
-	describe.skip('DELETE /users/:id/journal/:journal_id', () => {
-		test('204: deletes a journal by its id from the users profile', () => {
-			return request(app)
-				.delete('/user/0/journal/Dffe1IjkkMYpmQGuAU0a')
-				.expect(204);
-		});
-	});
+
 	describe('PATCH /users/:id/journal/:journal_id', () => {
 		test('200: returns the updated journal entry', async () => {
 			const updatedInfo = {
 				body: 'I am having lots of fun writing tests',
 			};
 			return request(app)
-				.patch('/user/0/journal/NOvYz7mYuECOa0nWogvu')
+				.patch('/user/0/journal/0')
 				.send(updatedInfo)
 				.expect(200)
 				.then(({ body: { updatedEntry } }) => {
 					expect(updatedEntry).toMatchObject({
-						title: 'I am feelling like fishing',
-						emotion: 'anxious',
+						title: 'Test Entry',
+						emotion: 'happy',
 						body: 'I am having lots of fun writing tests',
 					});
 				});
+		});
+	});
+
+	describe('DELETE /users/:id/journal/:journal_id', () => {
+		test('204: deletes a journal by its id from the users profile', () => {
+			return request(app).delete('/user/0/journal/0').expect(204);
 		});
 	});
 });
