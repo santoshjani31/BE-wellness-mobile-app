@@ -2,9 +2,10 @@ import testData from '../data/testdata';
 import seed from '../seeds/seed';
 import app from '../app.js';
 import request from 'supertest';
-import activities from '../data/testdata/activities.js';
 
-// beforeEach(async () => await seed(testData));
+beforeEach(async () => {
+	await seed(testData);
+});
 
 describe('/moods', () => {
 	describe('GET /moods', () => {

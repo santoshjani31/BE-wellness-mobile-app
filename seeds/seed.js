@@ -12,45 +12,34 @@ async function seed({
 		await deleteCollection(db, 'activities', activitiesData.length);
 
 		const usersRef = await db.collection('users').get();
-		usersRef.forEach(async (user) => {
+
+		for (const user of usersRef.docs) {
 			await deleteCollection(db, `users/${user.id}/journal`, 50);
-		});
+		}
 
 		await deleteCollection(db, 'users', userData.length);
 		await deleteCollection(db, 'articles', articlesData.length);
 
-		moodData.forEach(async (mood) => {
-			const moodsRef = await db
-				.collection('moods')
-				.doc(`${mood.emotion}`)
-				.set(mood);
-		});
+		for (const mood of moodData) {
+			await db.collection('moods').doc(`${mood.emotion}`).set(mood);
+		}
 
-		activitiesData.forEach(async (activity) => {
-			const activitiesRef = await db
-				.collection('activities')
-				.doc(`${activity.title}`)
-				.set(activity);
-		});
+		for (const activity of activitiesData) {
+			await db.collection('activities').doc(`${activity.title}`).set(activity);
+		}
 
-		userData.forEach(async (user, index) => {
-			const userRef = await db.collection('users').doc(`${index}`).set(user);
-		});
+		for (const [index, user] of userData.entries()) {
+			await db.collection('users').doc(`${index}`).set(user);
+		}
 
-		articlesData.forEach(async (article, index) => {
-			const articlesRef = await db
-				.collection('articles')
-				.doc(`${index}`)
-				.set(article);
-		});
+		for (const [index, article] of articlesData.entries()) {
+			await db.collection('articles').doc(`${index}`).set(article);
+		}
 
-		journalEntriesData.forEach(async (entry, index) => {
+		for (const [index, entry] of journalEntriesData.entries()) {
 			const userRef = db.collection('users').doc('0');
-			const journalRef = await userRef
-				.collection('journal')
-				.doc(`${index}`)
-				.set(entry);
-		});
+			await userRef.collection('journal').doc(`${index}`).set(entry);
+		}
 	} catch (err) {
 		console.log(err);
 	}
