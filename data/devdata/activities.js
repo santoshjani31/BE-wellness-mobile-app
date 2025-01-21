@@ -27,7 +27,7 @@ export default [
 		description: 'move your body and ground yourself with yoga',
 		duration: 350, //seconds
 		audioURL: '../../assets/audio_files/Happy - A Huevo - Luna Cantina.mp3',
-		imageURL: '../../assets/activity_pics/yoga.avif',
+		imageURL: '../../assets/activity_pics/yoga.jpg',
 		category: 'movement',
 		difficulty: 'intermediate',
 		moodTag: ['happy', 'anxious', 'sad'],
@@ -59,9 +59,8 @@ export default [
 		description: 'some good tunes and move your body',
 		duration: 300, //seconds
 		audioURL:
-			'../../assets/audio_files/Funky - I Had a Feeling - TrackTribe.mp3',
-		imageURL:
 			'../../assets/audio_files/Happy - Read My Lips Time To Party - Everet Almond.mp3',
+		imageURL: 'assets/activity_pics/conscious-dance.jpg',
 		category: 'movement',
 		difficulty: 'beginner',
 		moodTag: ['happy'],
