@@ -27,7 +27,7 @@ export default [
 		description: 'move your body and ground yourself with yoga',
 		duration: 350, //seconds
 		audioURL: '../../assets/audio_files/Happy - A Huevo - Luna Cantina.mp3',
-		imageURL: '../../assets/activity_pics/yoga.jpg',
+		imageURL: '../../assets/activity_pics/yoga.png',
 		category: 'movement',
 		difficulty: 'intermediate',
 		moodTag: ['happy', 'anxious', 'sad'],
