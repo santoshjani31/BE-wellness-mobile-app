@@ -18,6 +18,7 @@ async function seed({
 		}
 
 		await deleteCollection(db, 'users', userData.length);
+		
 		await deleteCollection(db, 'articles', articlesData.length);
 
 		for (const mood of moodData) {
